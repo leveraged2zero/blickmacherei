@@ -1,0 +1,16 @@
+# Abhängigkeiten
+node_modules/
+
+# Astro-Build-Ausgabe
+dist/
+.astro/
+
+# Umgebungsvariablen
+.env
+.env.production
+
+# Editor/OS
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json

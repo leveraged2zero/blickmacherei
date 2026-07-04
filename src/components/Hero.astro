@@ -1,0 +1,225 @@
+---
+import { Image } from 'astro:assets';
+import heroBild from '../assets/hero-startbild.jpg';
+---
+
+<section class="hero" aria-label="Einstieg">
+  <div class="hero-bild">
+    <Image
+      src={heroBild}
+      alt="Ultrarealistisches Porträt einer jungen Frau mit blonden Haaren an einer Uferpromenade"
+      widths={[768, 1280, 1920, 2560, 3840]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="scrim" aria-hidden="true"></div>
+  </div>
+
+  <div class="container hero-inner">
+    <div class="hero-text" data-reveal>
+      <p class="section-kicker">Studio für visuelle Kommunikation</p>
+      <h1>Bilder, die <em>hängen</em> bleiben.</h1>
+      <p class="hero-sub">
+        Ultrarealistische Porträts, Markengesichter und bewegte Bilder — produziert ohne
+        Fotostudio, ohne Terminstress, in kompromissloser Qualität. Von der ersten Idee
+        bis zum fertigen Motiv.
+      </p>
+      <div class="hero-aktionen">
+        <a href="#kontakt" class="btn btn-primary">Projekt anfragen</a>
+        <a href="#portfolio" class="btn btn-ghost">Arbeiten ansehen</a>
+      </div>
+      <ul class="hero-fakten" aria-label="Kurzüberblick">
+        <li>Porträts &amp; Avatare</li>
+        <li>Print &amp; Kampagnen</li>
+        <li>Video &amp; Animation</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    /* svh statt vh: stabil bei mobilen Browserleisten */
+    min-height: max(100svh, 42rem);
+    padding-top: 6rem;
+    padding-bottom: clamp(4rem, 8vh, 7rem);
+    overflow: hidden;
+  }
+
+  .hero-bild {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+
+  /* object-position 50% 0: die Bild-Oberkante ist IMMER sichtbar —
+     beschnitten wird bei extremen Seitenverhältnissen nur unten/seitlich,
+     nie der Kopf am oberen Bildrand. */
+  .hero-bild :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 0;
+  }
+
+  /* Doppelter Scrim: links dunkel für Textkontrast, oben sanft für den
+     fixierten Header, unten Übergang in den Seitenhintergrund. */
+  .scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        90deg,
+        rgba(5, 5, 8, 0.88) 0%,
+        rgba(5, 5, 8, 0.62) 38%,
+        rgba(5, 5, 8, 0.22) 62%,
+        rgba(5, 5, 8, 0.05) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(5, 5, 8, 0.55) 0%,
+        rgba(5, 5, 8, 0) 22%,
+        rgba(5, 5, 8, 0) 62%,
+        var(--bg-base) 100%
+      );
+  }
+
+  /* Light Mode: Der helle Hero-Text braucht bis fast ganz unten dunklen
+     Scrim — der Übergang in den hellen Seitenhintergrund passiert erst
+     in den letzten Prozenten. */
+  :global(html[data-theme='light']) .scrim {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(5, 5, 8, 0.88) 0%,
+        rgba(5, 5, 8, 0.62) 38%,
+        rgba(5, 5, 8, 0.22) 62%,
+        rgba(5, 5, 8, 0.05) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(5, 5, 8, 0.3) 0%,
+        rgba(5, 5, 8, 0) 18%,
+        rgba(5, 5, 8, 0) 74%,
+        rgba(5, 5, 8, 0.45) 88%,
+        var(--bg-base) 100%
+      );
+  }
+
+  .hero-inner {
+    position: relative;
+  }
+
+  /* Der Hero-Text liegt in beiden Themes auf dem dunkel abgedimmten Foto —
+     deshalb feste helle Farben statt Theme-Tokens. */
+  .hero-text {
+    max-width: 36rem;
+    color: #ececf1;
+  }
+
+  .hero-text :global(.section-kicker) {
+    color: #9aa5ff;
+  }
+
+  .hero-text :global(.section-kicker)::before {
+    background: #9aa5ff;
+  }
+
+  .hero-text :global(.btn-ghost) {
+    color: #ececf1;
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+
+  .hero-text :global(.btn-ghost:hover) {
+    border-color: #9aa5ff;
+    color: #9aa5ff;
+  }
+
+  h1 em {
+    color: #9aa5ff;
+    font-style: italic;
+  }
+
+  .hero-sub {
+    margin-top: 1.5rem;
+    font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+    color: #ececf1;
+    opacity: 0.92;
+    max-width: 34rem;
+    text-shadow: 0 1px 12px rgba(5, 5, 8, 0.6);
+  }
+
+  .hero-aktionen {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2.25rem;
+  }
+
+  .hero-fakten {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.75rem;
+    list-style: none;
+    padding: 0;
+    margin-top: 2.75rem;
+    color: #ececf1;
+    opacity: 0.85;
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    text-shadow: 0 1px 8px rgba(5, 5, 8, 0.7);
+  }
+
+  .hero-fakten li {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .hero-fakten li::before {
+    content: '';
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: #9aa5ff;
+  }
+
+  /* Schmale Hochkant-Viewports: Gesicht bleibt oben sichtbar,
+     Text rückt nach unten und bekommt mehr Scrim von unten. */
+  @media (max-width: 767px) {
+    .hero {
+      align-items: flex-end;
+      padding-top: 55svh;
+    }
+
+    .scrim {
+      background:
+        linear-gradient(
+          180deg,
+          rgba(5, 5, 8, 0.5) 0%,
+          rgba(5, 5, 8, 0.05) 22%,
+          rgba(5, 5, 8, 0.35) 48%,
+          rgba(5, 5, 8, 0.92) 78%,
+          var(--bg-base) 100%
+        );
+    }
+
+    /* Light Mode mobil: Textzone bleibt dunkel, Aufhellung erst ganz unten */
+    :global(html[data-theme='light']) .scrim {
+      background:
+        linear-gradient(
+          180deg,
+          rgba(5, 5, 8, 0.35) 0%,
+          rgba(5, 5, 8, 0.05) 22%,
+          rgba(5, 5, 8, 0.4) 48%,
+          rgba(5, 5, 8, 0.94) 72%,
+          rgba(5, 5, 8, 0.94) 94%,
+          var(--bg-base) 100%
+        );
+    }
+  }
+</style>

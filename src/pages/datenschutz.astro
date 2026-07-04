@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Datenschutzerklärung — blickmacherei"
+  description="Datenschutzerklärung der blickmacherei."
+>
+  <div class="container rechtsseite">
+    <h1>Datenschutzerklärung</h1>
+
+    <div class="platzhalter-hinweis" role="note">
+      <strong>Platzhalter:</strong> Dieses Gerüst deckt die technisch vorhandenen
+      Verarbeitungen ab (Hosting, Kontaktformular via Formspree, E-Mail). Es muss vor
+      Veröffentlichung geprüft und mit den eigenen Angaben vervollständigt werden —
+      idealerweise mit anwaltlicher Beratung oder einem geprüften Generator.
+    </div>
+
+    <h2>1. Verantwortlicher</h2>
+    <p>
+      [Vor- und Nachname]<br />
+      [Anschrift]<br />
+      E-Mail: kontakt@blickmacherei.de
+    </p>
+
+    <h2>2. Hosting</h2>
+    <p>
+      Diese Website ist eine statische Website ohne Cookies, ohne Tracking und ohne
+      Einbindung externer Schriften oder Skripte. Beim Aufruf verarbeitet der
+      Hosting-Anbieter technisch notwendige Server-Logdaten (z.&nbsp;B. IP-Adresse,
+      Zeitpunkt des Abrufs). [Hosting-Anbieter und ggf. Auftragsverarbeitungsvertrag
+      ergänzen.]
+    </p>
+
+    <h2>3. Kontaktformular (Formspree)</h2>
+    <p>
+      Für das Kontaktformular wird der Dienst Formspree Inc. genutzt. Die im Formular
+      eingegebenen Daten (Name, E-Mail-Adresse, Nachricht) werden zum Zweck der
+      Bearbeitung der Anfrage übermittelt und per E-Mail zugestellt.
+      Rechtsgrundlage ist Art.&nbsp;6 Abs.&nbsp;1 lit.&nbsp;b DSGVO (vorvertragliche
+      Maßnahmen). [Hinweis auf den mit Formspree geschlossenen
+      Auftragsverarbeitungsvertrag sowie Speicherdauer ergänzen.]
+    </p>
+
+    <h2>4. Kontakt per E-Mail</h2>
+    <p>
+      Bei Kontaktaufnahme per E-Mail werden die übermittelten Daten zur Bearbeitung
+      der Anfrage gespeichert. Rechtsgrundlage ist Art.&nbsp;6 Abs.&nbsp;1
+      lit.&nbsp;b DSGVO.
+    </p>
+
+    <h2>5. Ihre Rechte</h2>
+    <p>
+      Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der
+      Verarbeitung, Datenübertragbarkeit sowie Widerspruch (Art.&nbsp;15–21 DSGVO)
+      und das Recht auf Beschwerde bei einer Aufsichtsbehörde (Art.&nbsp;77 DSGVO).
+    </p>
+  </div>
+</Base>
+
+<style>
+  .rechtsseite {
+    padding-block: 9rem 5rem;
+    max-width: 46rem;
+  }
+
+  .rechtsseite h2 {
+    font-size: 1.35rem;
+    margin-top: 2.5rem;
+  }
+
+  .rechtsseite p {
+    margin-top: 0.85rem;
+    color: var(--fg-muted);
+  }
+
+  .platzhalter-hinweis {
+    margin-top: 2rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(124, 138, 255, 0.4);
+    border-radius: var(--radius-sm);
+    background: var(--accent-glow);
+    color: var(--fg);
+    font-size: 0.95rem;
+  }
+</style>

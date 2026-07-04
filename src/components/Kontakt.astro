@@ -1,0 +1,327 @@
+---
+import { KATEGORIEN } from '../data/kategorien';
+
+/**
+ * WICHTIG: Nach der Registrierung bei https://formspree.io hier die eigene
+ * Formular-ID eintragen (z. B. "mqkvnzyw"). Solange der Platzhalter steht,
+ * zeigt das Formular einen Hinweis und verlinkt stattdessen auf die E-Mail.
+ */
+const FORMSPREE_ID = 'DEINE_FORMSPREE_ID';
+const EMAIL = 'kontakt@blickmacherei.de';
+const formularAktiv = !FORMSPREE_ID.includes('DEINE');
+---
+
+<section id="kontakt" class="section" aria-labelledby="kontakt-titel">
+  <div class="container">
+    <div class="kontakt-kopf" data-reveal>
+      <p class="section-kicker">Kontakt</p>
+      <h2 id="kontakt-titel">Lassen Sie uns Ihr Projekt besprechen</h2>
+      <p class="section-intro">
+        Beschreiben Sie kurz, was Sie vorhaben — Sie erhalten innerhalb von
+        24&nbsp;Stunden eine persönliche Antwort mit erster Einschätzung und Festpreis.
+      </p>
+    </div>
+
+    <div class="kontakt-raster">
+      <form
+        id="kontakt-formular"
+        class="card kontakt-formular"
+        action={`https://formspree.io/f/${FORMSPREE_ID}`}
+        method="POST"
+        data-aktiv={String(formularAktiv)}
+        data-reveal
+      >
+        <div class="feld-reihe">
+          <div class="feld">
+            <label for="feld-name">Name <span aria-hidden="true">*</span></label>
+            <input
+              id="feld-name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              required
+              aria-required="true"
+            />
+          </div>
+          <div class="feld">
+            <label for="feld-email">E-Mail <span aria-hidden="true">*</span></label>
+            <input
+              id="feld-email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+              aria-required="true"
+            />
+          </div>
+        </div>
+
+        <div class="feld">
+          <label for="feld-leistung">Worum geht es?</label>
+          <select id="feld-leistung" name="leistung">
+            <option value="">Bitte wählen (optional)</option>
+            {KATEGORIEN.map((kategorie) => (
+              <option value={kategorie.label}>{kategorie.label}</option>
+            ))}
+          </select>
+        </div>
+
+        <div class="feld">
+          <label for="feld-nachricht">Ihr Projekt <span aria-hidden="true">*</span></label>
+          <textarea
+            id="feld-nachricht"
+            name="nachricht"
+            rows="6"
+            required
+            aria-required="true"
+            placeholder="Was soll entstehen? Gibt es einen Termin oder ein Budget?"
+          ></textarea>
+          <p class="feld-hinweis">Je konkreter die Beschreibung, desto präziser die erste Einschätzung.</p>
+        </div>
+
+        <!-- Honeypot gegen Spam — bleibt für Menschen unsichtbar -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="visually-hidden" aria-hidden="true" />
+
+        <p class="formular-status" role="status" aria-live="polite"></p>
+
+        <button type="submit" class="btn btn-primary formular-senden">
+          Anfrage senden
+        </button>
+        <p class="feld-hinweis pflicht-hinweis"><span aria-hidden="true">*</span> Pflichtfelder</p>
+      </form>
+
+      <aside class="kontakt-direkt" data-reveal style="--reveal-delay: 150ms">
+        <h3>Lieber direkt schreiben?</h3>
+        <p>
+          Kein Formular-Fan? Eine kurze Mail genügt — gern mit Beispielbildern
+          oder Links, die die Richtung zeigen.
+        </p>
+        <a class="btn btn-ghost" href={`mailto:${EMAIL}?subject=Projektanfrage`}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          {EMAIL}
+        </a>
+        <p class="antwortzeit">Antwort in der Regel innerhalb von 24 Stunden.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  .kontakt-raster {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+    align-items: start;
+  }
+
+  .kontakt-formular {
+    padding: 2rem;
+    display: grid;
+    gap: 1.4rem;
+  }
+
+  .kontakt-formular:hover {
+    transform: none;
+  }
+
+  .feld-reihe {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+  }
+
+  .feld {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .feld label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--fg);
+  }
+
+  .feld label span {
+    color: var(--accent);
+  }
+
+  .feld input,
+  .feld select,
+  .feld textarea {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.7rem 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    transition: border-color var(--dur-micro) var(--ease-out);
+  }
+
+  .feld textarea {
+    resize: vertical;
+    min-height: 8rem;
+  }
+
+  .feld input:focus,
+  .feld select:focus,
+  .feld textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+
+  .feld input::placeholder,
+  .feld textarea::placeholder {
+    color: rgba(162, 165, 179, 0.55);
+  }
+
+  .feld select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a2a5b3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+    cursor: pointer;
+  }
+
+  .feld-hinweis {
+    font-size: 0.82rem;
+    color: var(--fg-muted);
+  }
+
+  .formular-status {
+    display: none;
+    padding: 0.85rem 1.1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    max-width: none;
+  }
+
+  .formular-status.erfolg {
+    display: block;
+    background: rgba(74, 222, 128, 0.12);
+    border: 1px solid rgba(74, 222, 128, 0.4);
+    color: var(--success);
+  }
+
+  .formular-status.fehler {
+    display: block;
+    background: rgba(248, 113, 113, 0.1);
+    border: 1px solid rgba(248, 113, 113, 0.4);
+    color: var(--danger);
+  }
+
+  .formular-senden {
+    justify-self: start;
+  }
+
+  .formular-senden[disabled] {
+    opacity: 0.55;
+    cursor: progress;
+  }
+
+  .pflicht-hinweis {
+    margin-top: -0.6rem;
+  }
+
+  .kontakt-direkt {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    display: grid;
+    gap: 1.1rem;
+    justify-items: start;
+  }
+
+  .kontakt-direkt p {
+    color: var(--fg-muted);
+    font-size: 0.96rem;
+  }
+
+  .kontakt-direkt .btn {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .antwortzeit {
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 900px) {
+    .kontakt-raster {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .feld-reihe {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  const formular = document.getElementById('kontakt-formular') as HTMLFormElement | null;
+  const status = formular?.querySelector<HTMLElement>('.formular-status');
+  const senden = formular?.querySelector<HTMLButtonElement>('.formular-senden');
+
+  function zeigeStatus(text: string, art: 'erfolg' | 'fehler') {
+    if (!status) return;
+    status.textContent = text;
+    status.classList.remove('erfolg', 'fehler');
+    status.classList.add(art);
+  }
+
+  formular?.addEventListener('submit', async (ereignis) => {
+    ereignis.preventDefault();
+
+    if (formular.dataset.aktiv !== 'true') {
+      zeigeStatus(
+        'Das Formular ist noch nicht freigeschaltet (Formspree-ID fehlt). Bitte nutzen Sie den E-Mail-Link rechts.',
+        'fehler'
+      );
+      return;
+    }
+
+    if (senden) {
+      senden.disabled = true;
+      senden.textContent = 'Wird gesendet …';
+    }
+
+    try {
+      const antwort = await fetch(formular.action, {
+        method: 'POST',
+        body: new FormData(formular),
+        headers: { Accept: 'application/json' },
+      });
+
+      if (antwort.ok) {
+        formular.reset();
+        zeigeStatus(
+          'Vielen Dank! Ihre Anfrage ist eingegangen — Sie hören innerhalb von 24 Stunden von mir.',
+          'erfolg'
+        );
+      } else {
+        zeigeStatus(
+          'Das hat leider nicht geklappt. Bitte versuchen Sie es erneut oder schreiben Sie direkt per E-Mail.',
+          'fehler'
+        );
+      }
+    } catch {
+      zeigeStatus(
+        'Keine Verbindung möglich. Bitte prüfen Sie Ihr Internet oder schreiben Sie direkt per E-Mail.',
+        'fehler'
+      );
+    } finally {
+      if (senden) {
+        senden.disabled = false;
+        senden.textContent = 'Anfrage senden';
+      }
+    }
+  });
+</script>

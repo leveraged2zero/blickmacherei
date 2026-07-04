@@ -1,0 +1,88 @@
+---
+const jahr = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="footer-marke">
+      blickmacherei<span>.</span>
+      <span class="footer-claim">Bilder, die hängen bleiben.</span>
+    </p>
+    <nav aria-label="Rechtliches">
+      <ul class="footer-links">
+        <li><a href="/impressum/">Impressum</a></li>
+        <li><a href="/datenschutz/">Datenschutzerklärung</a></li>
+      </ul>
+    </nav>
+    <p class="footer-copy">© {jahr} blickmacherei</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding-block: 2.5rem;
+    background: var(--bg-deep);
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+  }
+
+  .footer-marke {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .footer-marke > span:first-of-type {
+    color: var(--accent);
+    margin-left: -0.7rem;
+  }
+
+  .footer-claim {
+    font-family: var(--font-sans);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: var(--fg-muted);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.75rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-links a {
+    color: var(--fg-muted);
+    font-size: 0.9rem;
+    padding-block: 0.5rem;
+  }
+
+  .footer-links a:hover {
+    color: var(--fg);
+  }
+
+  .footer-copy {
+    color: var(--fg-muted);
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 560px) {
+    .footer-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

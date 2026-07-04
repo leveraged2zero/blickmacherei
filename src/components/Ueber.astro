@@ -1,0 +1,119 @@
+---
+const schritte = [
+  {
+    titel: 'Briefing',
+    text: 'Sie beschreiben Ihr Vorhaben — formlos per Nachricht oder im kurzen Gespräch. Ich fasse zusammen, was Sie bekommen, mit klarem Festpreis.',
+  },
+  {
+    titel: 'Entwürfe',
+    text: 'Sie erhalten erste Motive zur Auswahl. Wir verfeinern gemeinsam, bis Bildsprache, Stimmung und Details exakt sitzen.',
+  },
+  {
+    titel: 'Finale Daten',
+    text: 'Sie bekommen alle Dateien produktionsfertig — fürs Web optimiert oder druckfertig für Ihre Druckerei, inklusive Nutzungsrechten.',
+  },
+];
+---
+
+<section id="ueber" class="section" aria-labelledby="ueber-titel">
+  <div class="container ueber-raster">
+    <div data-reveal>
+      <p class="section-kicker">Über die blickmacherei</p>
+      <h2 id="ueber-titel">Handwerk trifft neueste Bildtechnologie</h2>
+      <p class="section-intro">
+        Die blickmacherei produziert Bildwelten, die früher ein Team aus Fotograf,
+        Stylist und Postproduktion erfordert hätten — heute entstehen sie schneller,
+        flexibler und zu planbaren Kosten. Mein Schwerpunkt: ultrarealistische
+        Darstellungen von Menschen und Szenen, bei denen niemand fragt, wie sie
+        entstanden sind — sondern nur, wo man sie bekommt.
+      </p>
+      <ul class="werte">
+        <li>Diskretion &amp; klare Nutzungsrechte</li>
+        <li>Produktionsfertige Daten für Web und Druck</li>
+        <li>Schnelle Iteration statt langer Studiotermine</li>
+      </ul>
+    </div>
+
+    <ol class="schritte" aria-label="So läuft ein Projekt ab">
+      {schritte.map((schritt, i) => (
+        <li class="card schritt" data-reveal style={`--reveal-delay: ${i * 110}ms`}>
+          <span class="schritt-nummer" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <div>
+            <h3>{schritt.titel}</h3>
+            <p>{schritt.text}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .ueber-raster {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: start;
+  }
+
+  .werte {
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+    display: grid;
+    gap: 0.85rem;
+    color: var(--fg-muted);
+  }
+
+  .werte li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .werte li::before {
+    content: '';
+    flex: none;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 50%;
+    background:
+      no-repeat center / 0.8rem
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237c8aff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E"),
+      var(--accent-glow);
+  }
+
+  .schritte {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .schritt {
+    display: flex;
+    gap: 1.4rem;
+    padding: 1.75rem;
+  }
+
+  .schritt-nummer {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.7rem;
+    color: var(--accent);
+    line-height: 1.1;
+  }
+
+  .schritt p {
+    margin-top: 0.5rem;
+    color: var(--fg-muted);
+    font-size: 0.96rem;
+  }
+
+  @media (max-width: 900px) {
+    .ueber-raster {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

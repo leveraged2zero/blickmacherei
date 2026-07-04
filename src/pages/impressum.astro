@@ -1,0 +1,66 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Impressum — blickmacherei"
+  description="Impressum und Anbieterkennzeichnung der blickmacherei."
+>
+  <div class="container rechtsseite">
+    <h1>Impressum</h1>
+
+    <div class="platzhalter-hinweis" role="note">
+      <strong>Platzhalter:</strong> Diese Seite muss vor Veröffentlichung mit den
+      eigenen Angaben nach §&nbsp;5 DDG vervollständigt werden.
+    </div>
+
+    <h2>Angaben gemäß § 5 DDG</h2>
+    <p>
+      [Vor- und Nachname]<br />
+      [Straße und Hausnummer]<br />
+      [PLZ und Ort]
+    </p>
+
+    <h2>Kontakt</h2>
+    <p>
+      E-Mail: kontakt@blickmacherei.de<br />
+      Telefon: [Telefonnummer]
+    </p>
+
+    <h2>Umsatzsteuer</h2>
+    <p>
+      [Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG — oder Hinweis auf
+      Kleinunternehmerregelung nach § 19 UStG]
+    </p>
+
+    <h2>Verantwortlich für den Inhalt</h2>
+    <p>[Vor- und Nachname, Anschrift wie oben]</p>
+  </div>
+</Base>
+
+<style>
+  .rechtsseite {
+    padding-block: 9rem 5rem;
+    max-width: 46rem;
+  }
+
+  .rechtsseite h2 {
+    font-size: 1.35rem;
+    margin-top: 2.5rem;
+  }
+
+  .rechtsseite p {
+    margin-top: 0.85rem;
+    color: var(--fg-muted);
+  }
+
+  .platzhalter-hinweis {
+    margin-top: 2rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(124, 138, 255, 0.4);
+    border-radius: var(--radius-sm);
+    background: var(--accent-glow);
+    color: var(--fg);
+    font-size: 0.95rem;
+  }
+</style>

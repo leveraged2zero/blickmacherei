@@ -1,0 +1,243 @@
+---
+interface Props {
+  onepage?: boolean;
+}
+const { onepage = false } = Astro.props;
+
+const basis = onepage ? '' : '/';
+const links = [
+  { href: `${basis}#leistungen`, label: 'Leistungen' },
+  { href: `${basis}#portfolio`, label: 'Portfolio' },
+  { href: `${basis}#ueber`, label: 'Über' },
+  { href: `${basis}#kontakt`, label: 'Kontakt' },
+];
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="wortmarke" aria-label="blickmacherei — zur Startseite">
+      blickmacherei<span class="punkt">.</span>
+    </a>
+
+    <nav aria-label="Hauptnavigation">
+      <ul id="hauptmenue" class="menu">
+        {links.map((link) => (
+          <li><a href={link.href} class="menu-link">{link.label}</a></li>
+        ))}
+        <li>
+          <a href={`${basis}#kontakt`} class="btn btn-primary btn-nav">Projekt anfragen</a>
+        </li>
+      </ul>
+
+      <button
+        class="theme-toggle"
+        type="button"
+        aria-label="Zu hellem Design wechseln"
+        aria-pressed="false"
+      >
+        <svg class="icon-sonne" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" />
+        </svg>
+        <svg class="icon-mond" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+        </svg>
+      </button>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="hauptmenue"
+      >
+        <span class="visually-hidden">Menü öffnen</span>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="4" y1="7" x2="20" y2="7" />
+          <line x1="4" y1="12" x2="20" y2="12" />
+          <line x1="4" y1="17" x2="20" y2="17" />
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 100;
+    background: var(--header-bg);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 4.25rem;
+  }
+
+  .wortmarke {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.35rem;
+    color: var(--fg);
+    letter-spacing: 0.01em;
+  }
+
+  .wortmarke .punkt {
+    color: var(--accent);
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .menu {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 2.5vw, 2.2rem);
+    list-style: none;
+    padding: 0;
+    margin-right: clamp(0.5rem, 1.5vw, 1.25rem);
+  }
+
+  .menu-link {
+    color: var(--fg-muted);
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.5rem 0.25rem;
+  }
+
+  .menu-link:hover {
+    color: var(--fg);
+  }
+
+  .btn-nav {
+    min-height: 2.5rem;
+    padding: 0.45rem 1.25rem;
+    font-size: 0.92rem;
+  }
+
+  .theme-toggle,
+  .menu-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--fg);
+    width: 2.75rem;
+    height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color var(--dur-micro) var(--ease-out);
+  }
+
+  .theme-toggle:hover,
+  .menu-toggle:hover {
+    border-color: var(--accent);
+  }
+
+  /* Icon passend zum aktiven Theme: Dark zeigt Sonne (Wechselziel hell),
+     Light zeigt Mond (Wechselziel dunkel). */
+  .icon-mond {
+    display: none;
+  }
+
+  :global(html[data-theme='light']) .icon-sonne {
+    display: none;
+  }
+
+  :global(html[data-theme='light']) .icon-mond {
+    display: block;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .menu-toggle {
+      display: inline-flex;
+    }
+
+    .menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.25rem;
+      background: var(--menu-bg);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem clamp(1.25rem, 4vw, 2.5rem) 1.5rem;
+      margin-right: 0;
+    }
+
+    .menu.offen {
+      display: flex;
+    }
+
+    .menu-link {
+      display: block;
+      padding: 0.85rem 0.25rem;
+      font-size: 1.05rem;
+    }
+
+    .btn-nav {
+      margin-top: 0.75rem;
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const menu = document.getElementById('hauptmenue');
+
+  toggle?.addEventListener('click', () => {
+    const offen = menu?.classList.toggle('offen') ?? false;
+    toggle.setAttribute('aria-expanded', String(offen));
+  });
+
+  // Menü schließen, sobald ein Link gewählt wurde
+  menu?.addEventListener('click', (ereignis) => {
+    if ((ereignis.target as HTMLElement).closest('a')) {
+      menu.classList.remove('offen');
+      toggle?.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Theme-Umschaltung — Zustand liegt am <html data-theme>, Wahl wird gespeichert
+  const themeKnopf = document.querySelector<HTMLButtonElement>('.theme-toggle');
+
+  function themeLabelAktualisieren() {
+    const hell = document.documentElement.dataset.theme === 'light';
+    themeKnopf?.setAttribute(
+      'aria-label',
+      hell ? 'Zu dunklem Design wechseln' : 'Zu hellem Design wechseln'
+    );
+    themeKnopf?.setAttribute('aria-pressed', String(hell));
+  }
+
+  themeKnopf?.addEventListener('click', () => {
+    const neues = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+    document.documentElement.dataset.theme = neues;
+    try {
+      localStorage.setItem('theme', neues);
+    } catch {}
+    themeLabelAktualisieren();
+  });
+
+  themeLabelAktualisieren();
+</script>

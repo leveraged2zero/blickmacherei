@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750">
+  <defs>
+    <radialGradient id="g11" cx="50%" cy="40%" r="90%">
+      <stop offset="0%" stop-color="#203848"/>
+      <stop offset="100%" stop-color="#0a0f14"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="750" fill="url(#g11)"/>
+  <circle cx="864" cy="225" r="262.5" fill="rgba(124,138,255,0.05)"/>
+  <circle cx="300" cy="562.5" r="210.00000000000003" fill="rgba(255,255,255,0.025)"/>
+  <rect x="1" y="1" width="1198" height="748" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="2"/>
+  <text x="50%" y="49%" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="41" fill="rgba(236,236,241,0.5)">Landingpage Design</text>
+  <text x="50%" y="55%" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" letter-spacing="3" fill="rgba(162,165,179,0.45)">PLATZHALTER — EIGENES BILD</text>
+</svg>

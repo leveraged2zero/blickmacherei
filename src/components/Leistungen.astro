@@ -1,0 +1,144 @@
+---
+import { KATEGORIEN } from '../data/kategorien';
+---
+
+<section id="leistungen" class="section" aria-labelledby="leistungen-titel">
+  <div class="container">
+    <div data-reveal>
+      <p class="section-kicker">Leistungen</p>
+      <h2 id="leistungen-titel">Was ich für Sie gestalte</h2>
+      <p class="section-intro">
+        Sechs Bereiche, ein Anspruch: Ergebnisse, die aussehen, als hätte ein ganzes
+        Studio daran gearbeitet — zu einem Bruchteil der Zeit und Kosten.
+      </p>
+    </div>
+
+    <div class="leistungen-raster">
+      {KATEGORIEN.map((kategorie, i) => (
+        <article
+          class="card leistung"
+          data-reveal
+          style={`--reveal-delay: ${(i % 3) * 90}ms`}
+        >
+          <div class="leistung-icon" aria-hidden="true">
+            <svg
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              set:html={kategorie.icon}
+            />
+          </div>
+          <h3>{kategorie.label}</h3>
+          <p class="leistung-beschreibung">{kategorie.beschreibung}</p>
+          <ul class="leistung-punkte">
+            {kategorie.punkte.map((punkt) => (
+              <li>{punkt}</li>
+            ))}
+          </ul>
+          <a
+            href="#portfolio"
+            class="leistung-link"
+            data-filter-link={kategorie.slug}
+          >
+            Beispiele ansehen
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <p class="leistungen-cta" data-reveal>
+      Nichts Passendes dabei? <a href="#kontakt">Erzählen Sie mir Ihr Projekt.</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .leistungen-raster {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+
+  .leistung {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1.75rem;
+  }
+
+  .leistung-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: var(--radius-sm);
+    background: var(--accent-glow);
+    color: var(--accent);
+    margin-bottom: 1.4rem;
+  }
+
+  .leistung-beschreibung {
+    color: var(--fg-muted);
+    margin-top: 0.75rem;
+    font-size: 0.98rem;
+  }
+
+  .leistung-punkte {
+    list-style: none;
+    padding: 0;
+    margin: 1.25rem 0 1.5rem;
+    display: grid;
+    gap: 0.6rem;
+    font-size: 0.93rem;
+    color: var(--fg-muted);
+  }
+
+  .leistung-punkte li {
+    padding-left: 1.35rem;
+    position: relative;
+  }
+
+  .leistung-punkte li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 2px;
+    background: var(--accent-strong);
+    transform: rotate(45deg);
+  }
+
+  .leistung-link {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+
+  .leistung-link svg {
+    transition: transform var(--dur-micro) var(--ease-out);
+  }
+
+  .leistung-link:hover svg {
+    transform: translateX(4px);
+  }
+
+  .leistungen-cta {
+    margin-top: 3rem;
+    text-align: center;
+    color: var(--fg-muted);
+    font-size: 1.05rem;
+    max-width: none;
+  }
+</style>
